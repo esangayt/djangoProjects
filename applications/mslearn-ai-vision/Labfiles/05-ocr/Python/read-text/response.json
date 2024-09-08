@@ -1,0 +1,54 @@
+//API https://<endpoint>/computervision/imageanalysis:analyze?features=read&...
+{
+    "metadata":
+    {
+        "width": 500,
+        "height": 430
+    },
+    "readResult":
+    {
+        "blocks":
+        [
+            {
+                "lines":
+                [
+                    {
+                        "text": "Hello World!",
+                        "polígono delimitador":
+                        [
+                            {"x":251,"y":265},
+                            {"x":673,"y":260},
+                            {"x":674,"y":308},
+                            {"x":252,"y":318}
+                        ],
+                        "words":
+                        [
+                            {
+                                "text":"Hello",
+                                "boundingPolygon":
+                                [
+                                    {"x":252,"y":267},
+                                    {"x":307,"y":265},
+                                    {"x":307,"y":318},
+                                    {"x":253,"y":318}
+                                ],
+                            "confidence":0.996
+                            },
+                            {
+                                "text":"World!",
+                                "boundingPolygon":
+                                [
+                                    {"x":318,"y":264},
+                                    {"x":386,"y":263},
+                                    {"x":387,"y":316},
+                                    {"x":319,"y":318}
+                                ],
+                                "confidence":0.99
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
