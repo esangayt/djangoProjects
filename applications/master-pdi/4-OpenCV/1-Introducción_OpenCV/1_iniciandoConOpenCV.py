@@ -7,97 +7,119 @@ Created on Tue Jul 20 17:39:50 2021
 ##importamos la libreria OpenCV usando import cv2
 
 import cv2
-
-# ##Utilizando el comando imread de opencv leeremos la imagen 1.jpeg y la guardaremos en la variable img
-# img = cv2.imread("1.jpeg")
-
-# #utilizando el comando imshow de opencv mostraremos la imangen en una ventana llamda ventana
-# cv2.imshow("ventana", img)
-
-# ##Controla el tiempo de muestreo de la señal de entrada por teclado
-# cv2.waitKey()
-
-# ##Cierra todas las ventanas creadas por OpenCV
-# cv2.destroyAllWindows()
-
-# ##Guardamos la imagen contenida en la variable img en el archivo imagenGuardada1.jpeg
-# cv2.imwrite("imagenGuardada1.jpeg", img)
+import argparse
 
 
+def normalUse():
+    # ##Utilizando el comando imread de opencv leeremos la imagen 1.jpeg y la guardaremos en la variable img
+    img = cv2.imread("1.jpeg")
+
+    # #utilizando el comando imshow de opencv mostraremos la imangen en una ventana llamda ventana
+    cv2.imshow("ventana", img)
+
+    # ##Controla el tiempo de muestreo de la señal de entrada por teclado
+    cv2.waitKey()
+
+    # ##Cierra todas las ventanas creadas por OpenCV
+    cv2.destroyAllWindows()
+
+    # ##Guardamos la imagen contenida en la variable img en el archivo imagenGuardada1.jpeg
+    cv2.imwrite("imagenGuardada1.jpeg", img)
 
 
-# ##Agregando IMREAD_GRAYSCALE podemos leer la imagen en escala de grises
-# img = cv2.imread("1.jpeg", cv2.IMREAD_GRAYSCALE)
+def grayScaleUse():
+    # ##Agregando IMREAD_GRAYSCALE podemos leer la imagen en escala de grises
+    img = cv2.imread("1.jpeg", cv2.IMREAD_GRAYSCALE)
 
-# #utilizando el comando imshow de opencv mostraremos la imangen en una ventana llamda ventana
-# cv2.imshow("ventanaGrayScale", img)
+    # #utilizando el comando imshow de opencv mostraremos la imangen en una ventana llamda ventana
+    cv2.imshow("ventanaGrayScale", img)
 
-# ##Controla el tiempo de muestreo de la señal de entrada por teclado
-# cv2.waitKey()
+    # ##Controla el tiempo de muestreo de la señal de entrada por teclado
+    cv2.waitKey()
 
-# ##Cierra todas las ventanas creadas por OpenCV
-# cv2.destroyAllWindows()
+    # ##Cierra todas las ventanas creadas por OpenCV
+    cv2.destroyAllWindows()
 
-# ##Guardamos la imagen contenida en la variable img en el archivo imagenGuardada1.jpeg
-# cv2.imwrite("imagenGuardadaGray1.png", img)
-
+    # ##Guardamos la imagen contenida en la variable img en el archivo imagenGuardada1.jpeg
+    cv2.imwrite("imagenGuardadaGray1.png", img)
 
 
 ##Jugando con waitKey()
 
-# img = cv2.imread("1.jpeg")
-# img2 = cv2.imread("1.jpeg", cv2.IMREAD_GRAYSCALE)
+def usingWaitKey():
+    img = cv2.imread("1.jpeg")
 
-# while True:
-#     cv2.imshow("color", img)
-#     cv2.imshow("grises", img2)
-    
-#     key = cv2.waitKey()
-    
-#     if key == ord("g"):
-#         cv2.imwrite("imagenGuardada.png", img)
-    
-#     elif key == ord("G"):
-#         cv2.imwrite("imagenGuardada2.png", img)
-#     else:
-#         break
-    
-# cv2.destroyAllWindows()
+    img2 = cv2.imread("1.jpeg", cv2.IMREAD_GRAYSCALE)
 
+    while True:
+        cv2.imshow("color", img)
+        cv2.imshow("grises", img2)
 
+        key = cv2.waitKey()
 
-img = cv2.imread("1.jpeg")
-img2 = cv2.imread("1.jpeg", cv2.IMREAD_GRAYSCALE)
+        if key == ord("g"):
+            cv2.imwrite("imagenGuardada.png", img)
 
-#Mostramos la imagen a color y esto nos genera la ventana
-cv2.imshow("ventana", img) 
+        elif key == ord("G"):
+            cv2.imwrite("imagenGuardada2.png", img)
+        else:
+            break
 
-#Generamos una ventana vacia para ahí mostrar las imagenes
-# WINDOW_NORMAL permite redimencionar la ventana
-# cv2.namedWindow("ventana",cv2.WINDOW_NORMAL)
+    cv2.destroyAllWindows()
 
-# WINDOW_AUTOSIZE no nos permite modificar el tamaño de la ventana
-# cv2.namedWindow("ventana",cv2.WINDOW_AUTOSIZE)
+def showNormalOrGrayScale():
 
-#Aplicamos la propiedad full screen a la ventana
-cv2.namedWindow("ventana", cv2.WND_PROP_FULLSCREEN)
+    img = cv2.imread("1.jpeg")
+    img2 = cv2.imread("1.jpeg", cv2.IMREAD_GRAYSCALE)
 
-#Activamos la propiedad full screen en la ventana
-cv2.setWindowProperty("ventana",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
-# cv2.setWindowProperty("ventana",0,1)
+    # Mostramos la imagen a color y esto nos genera la ventana
+    cv2.imshow("ventana", img)
 
-while True:
-    
-    key = cv2.waitKey()
-    
-    if key == ord("4"):
+    # Generamos una ventana vacia para ahí mostrar las imagenes
+    # WINDOW_NORMAL permite redimencionar la ventana
+    cv2.namedWindow("ventana", cv2.WINDOW_AUTOSIZE)
+
+    # WINDOW_AUTOSIZE no nos permite modificar el tamaño de la ventana
+    # cv2.namedWindow("ventana",cv2.WINDOW_AUTOSIZE)
+
+    # Aplicamos la propiedad full screen a la ventana
+    # cv2.namedWindow("ventana", cv2.WND_PROP_FULLSCREEN)
+
+    # Activamos la propiedad full screen en la ventana
+    # cv2.setWindowProperty("ventana",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+    # cv2.setWindowProperty("ventana",0,1)
+    while True:
+        key = cv2.waitKey()
+
+        if key == ord("4"):
+            cv2.imshow("ventana", img)
+        elif key == ord("6"):
+            cv2.imshow("ventana", img2)
+        else:
+            break
+
+    cv2.destroyAllWindows()
+
+def main():
+    parser = argparse.ArgumentParser(description="Ejemplo de uso de OpenCV")
+    parser.add_argument("-i","--image", type=str, help="Nombre de la imagen a cargar")
+    parser.add_argument("-g","--gray", action="store_true", help="Mostrar la imagen en escala de grises")
+    args = parser.parse_args()
+
+    if args.image:
+        if args.gray:
+            img = cv2.imread(args.image, cv2.IMREAD_GRAYSCALE)
+        else:
+            img = cv2.imread(args.image)
         cv2.imshow("ventana", img)
-    
-    elif key == ord("6"):
-        cv2.imshow("ventana", img2)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
     else:
-        break
-    
-cv2.destroyAllWindows()
+        print("No se proporciono una imagen para mostrar")
 
-
+if __name__ == "__main__":
+    # normalUse()
+    # grayScaleUse()
+    # usingWaitKey()
+    # showNormalOrGrayScale()
+    main()
