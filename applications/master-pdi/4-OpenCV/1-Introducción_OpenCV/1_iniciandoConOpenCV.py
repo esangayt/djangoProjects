@@ -9,6 +9,8 @@ Created on Tue Jul 20 17:39:50 2021
 import cv2
 import argparse
 
+from numpy.random import normal
+
 
 def normalUse():
     # ##Utilizando el comando imread de opencv leeremos la imagen 1.jpeg y la guardaremos en la variable img
@@ -67,8 +69,8 @@ def usingWaitKey():
 
     cv2.destroyAllWindows()
 
-def showNormalOrGrayScale():
 
+def showNormalOrGrayScale():
     img = cv2.imread("1.jpeg")
     img2 = cv2.imread("1.jpeg", cv2.IMREAD_GRAYSCALE)
 
@@ -100,11 +102,36 @@ def showNormalOrGrayScale():
 
     cv2.destroyAllWindows()
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Ejemplo de uso de OpenCV")
-    parser.add_argument("-i","--image", type=str, help="Nombre de la imagen a cargar")
-    parser.add_argument("-g","--gray", action="store_true", help="Mostrar la imagen en escala de grises")
+    parser = argparse.ArgumentParser(
+        prog="AppOpenCV.py",
+        description="Ejemplo de uso de OpenCV",
+        epilog="Desarrollado por esan 2024",
+    )
+
+    parser.add_argument(
+        "-i", "--image",
+        # required=True,
+        type=str,
+        help="Nombre de la imagen a cargar en %(prog)s"
+    )
+
+    parser.add_argument("-g", "--gray", action="store_true", help="Mostrar la imagen en escala de grises en %(prog)s")
+    parser.add_argument("-a","--action", choices=["normal", "grayscale", "waitkey", "show"], help="Acción a realizar")
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s version 1.0")
+
     args = parser.parse_args()
+
+    if args.action:
+        if args.action == "normal":
+            normalUse()
+        elif args.action == "grayscale":
+            grayScaleUse()
+        elif args.action == "waitkey":
+            usingWaitKey()
+        elif args.action == "show":
+            showNormalOrGrayScale()
 
     if args.image:
         if args.gray:
@@ -114,12 +141,12 @@ def main():
         cv2.imshow("ventana", img)
         cv2.waitKey()
         cv2.destroyAllWindows()
-    else:
-        print("No se proporciono una imagen para mostrar")
+
+
 
 if __name__ == "__main__":
-    # normalUse()
-    # grayScaleUse()
-    # usingWaitKey()
-    # showNormalOrGrayScale()
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"Error: {e}")
+        exit(1)
