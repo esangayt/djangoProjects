@@ -22,3 +22,8 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 # MEDIA_ROOT = BASE_DIR.child('media')
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'packages.core.renderers.CustomJSONRenderer',
+    )
+}
