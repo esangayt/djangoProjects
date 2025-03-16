@@ -17,6 +17,8 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
+    'packages.hospital',
+    'packages.core'
 ]
 
 THIRD_PARTY_APPS = [
@@ -72,7 +74,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'hospital.Usuario'
 
 LANGUAGE_CODE = 'es-mx'
 
