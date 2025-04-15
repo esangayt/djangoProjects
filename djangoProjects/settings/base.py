@@ -7,24 +7,30 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('APP_DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = []
 
-DJANGO_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+SHARED_APPS = [
+    'django_tenants',  # mandatory
+    'customers', # you must list the app where your tenant model resides in
 ]
 
-LOCAL_APPS = [
+TENANT_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+
+    'packages.core',
+    'packages.accounts',
 ]
 
 THIRD_PARTY_APPS = [
 ]
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = SHARED_APPS + TENANT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,3 +99,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TENANT_MODEL = "customers.Client"
+TENANT_DOMAIN_MODEL = "customers.Domain"
