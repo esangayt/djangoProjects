@@ -25,5 +25,8 @@ DATABASES = {
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'packages.core.renderers.CustomJSONRenderer',
-    )
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
 }

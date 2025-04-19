@@ -18,10 +18,12 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     'packages.hospital',
-    'packages.core'
+    'packages.core',
+    'packages.home',
 ]
 
 THIRD_PARTY_APPS = [
+    'rest_framework',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -95,3 +97,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
