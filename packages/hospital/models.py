@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class Usuario(AbstractUser):
     email = models.EmailField(unique=True)
-    img = models.URLField(blank=True, null=True)
+    img = models.ImageField(upload_to='usuarios/')
     role = models.CharField(max_length=50, default='USER_ROLE')
     google = models.BooleanField(default=False)
 
@@ -18,7 +18,7 @@ class Usuario(AbstractUser):
 
 class Hospital(models.Model):
     nombre = models.CharField(max_length=255)
-    img = models.URLField(blank=True, null=True)
+    img = models.ImageField(upload_to='hospitales/')
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Hospital(models.Model):
 
 class Medico(models.Model):
     nombre = models.CharField(max_length=255)
-    img = models.URLField(blank=True, null=True)
+    img = models.ImageField(upload_to='medicos/')
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
 

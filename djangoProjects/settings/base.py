@@ -98,3 +98,22 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "location": "hospital",
+            "access_key": config('AWS_ACCESS_KEY_ID'),
+            "secret_key": config('AWS_SECRET_ACCESS_KEY'),
+            "bucket_name": config('AWS_BUCKET'),
+            "region_name": config('AWS_DEFAULT_REGION'),
+            "signature_version": 's3v4',
+            "custom_domain": f"{config('AWS_BUCKET')}.s3.{config('AWS_DEFAULT_REGION')}.amazonaws.com",
+            "querystring_auth": False,
+            "file_overwrite": False,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
