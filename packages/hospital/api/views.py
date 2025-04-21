@@ -25,6 +25,8 @@ class DoctorVS(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
 
     # permission_classes = [permissions.IsAuthenticated]
+
+
 # python manage.py migrate hospital zero
 # python manage.py migrate admin zero
 # python manage.py migrate
@@ -34,7 +36,7 @@ class BusquedaView(APIView):
     def get(self, request, busqueda):
         search_field = busqueda or ""
 
-        usuarios = Usuario.objects.filter(nombre__icontains=search_field)
+        usuarios = Usuario.objects.filter(username__icontains=search_field)
         medicos = Medico.objects.filter(nombre__icontains=search_field)
         hospitales = Hospital.objects.filter(nombre__icontains=search_field)
 
@@ -47,4 +49,30 @@ class BusquedaView(APIView):
             "usuarios": usuarios_serializados.data,
             "medicos": medicos_serializados.data,
             "hospitales": hospitales_serializados.data,
+        })
+
+
+class BusquedaColeccionView(APIView):
+    def get(self, request, table, busqueda):
+        search_field = busqueda or ""
+
+        if table == "usuarios":
+            queryset = Usuario.objects.filter(nombre__icontains=search_field)
+            serializer_class = UsuarioSerializer
+        elif table == "medicos":
+            queryset = Medico.objects.filter(nombre__icontains=search_field)
+            serializer_class = MedicoSerializer
+        elif table == "hospitales":
+            queryset = Hospital.objects.filter(nombre__icontains=search_field)
+            serializer_class = HospitalSerializer
+        else:
+            return Response(
+                {"msg": "La tabla tiene que ser usuarios, medicos u hospitales"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serialized_data = serializer_class(queryset, many=True).data
+
+        return Response({
+            "data": serialized_data,
         })
