@@ -17,6 +17,7 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
+    'packages.blog'
 ]
 
 THIRD_PARTY_APPS = [
