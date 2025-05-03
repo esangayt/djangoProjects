@@ -2,7 +2,12 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import settings
 
-from packages.blog.managers import PublishedManager
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return (
+            super().get_queryset().filter(status=Post.Status.PUBLISHED)
+        )
 
 
 class Post(models.Model):
