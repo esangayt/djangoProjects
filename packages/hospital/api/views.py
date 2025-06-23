@@ -22,7 +22,7 @@ class UsuarioVS(viewsets.ModelViewSet):
 
 class DoctorVS(viewsets.ModelViewSet):
     queryset = Medico.objects.all()
-    serializer_class = UsuarioSerializer
+    serializer_class = MedicoSerializer
 
     # permission_classes = [permissions.IsAuthenticated]
 
