@@ -123,6 +123,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-**/applications/*/migrations/
+# Django migrations en apps bajo packages: ignora todo menos __init__.py
+packages/*/migrations/**/*.py
+!packages/*/migrations/__init__.py
+
 .idea
 /**/django-key.json
